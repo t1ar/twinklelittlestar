@@ -38,8 +38,13 @@ class PostController extends Controller
     public function show(Post $post)
     {
         $post->load(['user', 'community']);
+        $byParent = $post->comments()
+            ->with('user')
+            ->orderBy('created_at')
+            ->get()
+            ->groupBy('parent_id');
 
-        return view('posts.show', compact('post'));
+        return view('posts.show', compact('post', 'byParent'));
     }
 
     public function destroy(Request $request, Post $post)

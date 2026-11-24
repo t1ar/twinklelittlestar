@@ -28,10 +28,11 @@
 
     <div class="py-8 max-w-4xl mx-auto sm:px-6 lg:px-8 space-y-4">
         @forelse ($posts as $post)
-            <div class="bg-white p-4 rounded-lg shadow-sm">
+            <a href="{{ route('posts.show', $post) }}"
+               class="block bg-white p-4 rounded-lg shadow-sm hover:bg-gray-50">
                 <div class="font-semibold">{{ $post->title }}</div>
                 <p class="text-xs text-gray-400">by {{ $post->user->name }} · {{ $post->created_at->diffForHumans() }}</p>
-            </div>
+            </a>
         @empty
             <p class="text-gray-500">No posts yet.</p>
         @endforelse
