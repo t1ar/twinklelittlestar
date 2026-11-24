@@ -14,6 +14,9 @@ use Illuminate\Notifications\Notifiable;
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
+    public function posts()       { return $this->hasMany(Post::class); }
+    public function comments()    { return $this->hasMany(Comment::class); }
+    public function communities() { return $this->belongsToMany(Community::class)->withPivot('role'); }
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 
